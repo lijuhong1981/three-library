@@ -1,0 +1,2 @@
+# three-cameraFlightAnimation
+一个针对threejs的Camera对象开发的飞行动画插件
