@@ -1,0 +1,36 @@
+{
+  "name": "@lijuhong1981/three-cameraflight",
+  "version": "1.0.0",
+  "description": "一个针对threejs的Camera对象开发的飞行动画插件",
+  "type": "module",
+  "main": "./dist/CameraFlightAnimation.umd.js",
+  "module": "./dist/CameraFlightAnimation.esm.js",
+  "scripts": {
+    "build": "npx rollup -c",
+    "build-api": "jsdoc2md -f index.js | replace-between --target API.md --token API",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lijuhong1981/three-cameraFlightAnimation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lijuhong1981/three-cameraFlightAnimation/issues"
+  },
+  "homepage": "https://github.com/lijuhong1981/three-cameraFlightAnimation#readme",
+  "dependencies": {
+    "@lijuhong1981/jsmath": "^1.3.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "jsdoc-to-markdown": "^9.1.1",
+    "replace-between": "^0.0.8",
+    "rollup": "^4.40.0",
+    "rollup-plugin-cleanup": "^3.2.1"
+  }
+}

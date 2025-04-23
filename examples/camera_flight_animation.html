@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>three.js webgl - cameraFlightAnimation</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <script type="importmap">
+			{
+				"imports": {
+					"three": "../node_modules/three/build/three.module.js",
+					"libs/": "./libs/"
+				}
+			}
+		</script>
+
+    <script type="module">
+
+        import * as THREE from 'three';
+        import TWEEN from 'libs/tween.module.js';
+        import { GUI } from 'libs/lil-gui.module.min.js';
+        import { OrbitControls } from 'libs/OrbitControls.js';
+        import getCameraFlightAnimation from "../CameraFlightAnimation/dist/CameraFlightAnimation.esm.js";
+
+        const CameraFlightAnimation = getCameraFlightAnimation(THREE, TWEEN);
+
+        let renderer, scene, camera, controls, cameraFlight;
+
+        const guiParams = {
+            isFlighting: false,
+            positionX: 0,
+            positionY: 0,
+            positionZ: 0,
+            rotationX: 0,
+            rotationY: 0,
+            rotationZ: 0,
+            duration: 3.0,
+            flyTo: function () {
+                if (cameraFlight) {
+                    cameraFlight.flyTo({
+                        position: {
+                            x: guiParams.positionX,
+                            y: guiParams.positionY,
+                            z: guiParams.positionZ,
+                        },
+                        rotation: {
+                            x: THREE.MathUtils.degToRad(guiParams.rotationX),
+                            y: THREE.MathUtils.degToRad(guiParams.rotationY),
+                            z: THREE.MathUtils.degToRad(guiParams.rotationZ),
+                        },
+                        duration: guiParams.duration,
+                    });
+                }
+            }
+        };
+
+        init();
+        initGUI();
+
+        function init() {
+
+            // renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // scene
+            scene = new THREE.Scene();
+
+            // camera
+            camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
+            camera.position.set(0, 0, 100);
+
+            // controls
+            // controls = new OrbitControls(camera, renderer.domElement);
+            // controls.listenToKeyEvents(window); // optional
+            // //controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
+            // controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+            // controls.dampingFactor = 0.05;
+            // controls.screenSpacePanning = false;
+            // controls.minDistance = 0;
+            // controls.maxDistance = 500;
+            // controls.maxPolarAngle = Math.PI / 2;
+
+            // cameraFlight
+            cameraFlight = new CameraFlightAnimation(camera);
+
+            // light
+            scene.add(new THREE.AmbientLight(0xffffff, 3.0));
+
+            // floor
+            const floor = new THREE.Mesh(new THREE.PlaneGeometry(1000, 1000), new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide }));
+            floor.rotation.set(Math.PI / 2, 0, 0);
+            floor.position.set(0, -10, 0);
+            scene.add(floor);
+
+            // meshes
+            const box = new THREE.Mesh(new THREE.BoxGeometry(10, 10, 10), new THREE.MeshBasicMaterial({ color: 0xffffff * Math.random() }));
+            box.position.set(20, 0, 0);
+            scene.add(box);
+
+            const capsule = new THREE.Mesh(new THREE.CapsuleGeometry(1, 1, 4, 8), new THREE.MeshBasicMaterial({ color: 0xffffff * Math.random() }));
+            capsule.position.set(0, 0, 0);
+            scene.add(capsule);
+
+            const circle = new THREE.Mesh(new THREE.CircleGeometry(5, 32), new THREE.MeshBasicMaterial({ color: 0xffffff * Math.random() }));
+            circle.position.set(-20, 0, 0);
+            scene.add(circle);
+
+            const cone = new THREE.Mesh(new THREE.ConeGeometry(5, 20, 32), new THREE.MeshBasicMaterial({ color: 0xffffff * Math.random() }));
+            cone.position.set(0, 0, -20);
+            scene.add(cone);
+
+            const cylinder = new THREE.Mesh(new THREE.CylinderGeometry(5, 5, 20, 32), new THREE.MeshBasicMaterial({ color: 0xffffff * Math.random() }));
+            cylinder.position.set(0, 0, 20);
+            scene.add(cylinder);
+
+            // listen resize
+            window.addEventListener('resize', onWindowResize);
+
+            // start animate
+            requestAnimationFrame(animate);
+
+        }
+
+        function initGUI() {
+            const gui = new GUI();
+
+            gui.add(guiParams, 'isFlighting').listen();
+            gui.add(guiParams, 'positionX');
+            gui.add(guiParams, 'positionY');
+            gui.add(guiParams, 'positionZ');
+            gui.add(guiParams, 'rotationX');
+            gui.add(guiParams, 'rotationY');
+            gui.add(guiParams, 'rotationZ');
+            gui.add(guiParams, 'duration');
+            gui.add(guiParams, 'flyTo');
+
+            gui.open();
+        }
+
+        function onWindowResize() {
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            // render();
+
+        }
+
+        function render() {
+
+            renderer.render(scene, camera);
+
+        }
+
+        function animate(time) {
+
+            requestAnimationFrame(animate);
+
+            TWEEN.update(time);
+            // controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
+            render();
+
+            guiParams.isFlighting = cameraFlight.isFlighting;
+
+        }
+
+    </script>
+
+</body>
+
+</html>
