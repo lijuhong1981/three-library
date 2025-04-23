@@ -34,7 +34,7 @@ npm install @lijuhong1981/three-cameraflight
 ### 导入
 
 ```js
-import * as TRHEE from 'three';
+import * as THREE from 'three';
 import TWEEN from '@tweenjs/tween.js';
 import getCameraFlightAnimation from '@lijuhong1981/three-cameraflight';
 ```
@@ -52,7 +52,7 @@ import getCameraFlightAnimation from '@lijuhong1981/three-cameraflight';
 ### 模块化导入
 
 ```js
-import * as TRHEE from './path/to/three.module.js';
+import * as THREE from './path/to/three.module.js';
 import TWEEN from './path/to/tween.esm.js';
 import getCameraFlightAnimation from './path/to/CameraFlightAnimation.esm.js';
 ```
