@@ -3,4 +3,4 @@
 
 ## 扩展插件
 
-相机飞行动画 [CameraFlightAnimation](./cameraFlightAnimation/README.md)
+相机飞行动画 [CameraFlightAnimation](./CameraFlightAnimation/README.md)
