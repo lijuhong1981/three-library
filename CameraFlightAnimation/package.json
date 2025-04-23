@@ -12,15 +12,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lijuhong1981/three-cameraFlightAnimation.git"
+    "url": "git+https://github.com/lijuhong1981/three-library.git"
   },
-  "keywords": [],
+  "keywords": [
+    "three",
+    "camera",
+    "flight",
+    "animation",
+    "tween"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lijuhong1981/three-cameraFlightAnimation/issues"
+    "url": "https://github.com/lijuhong1981/three-library/issues"
   },
-  "homepage": "https://github.com/lijuhong1981/three-cameraFlightAnimation#readme",
+  "homepage": "https://github.com/lijuhong1981/three-library/tree/main/CameraFlightAnimation#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
     "@lijuhong1981/jsmath": "^1.3.1"
   },
