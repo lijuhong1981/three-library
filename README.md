@@ -4,3 +4,10 @@
 ## 扩展插件
 
 相机飞行动画 [CameraFlightAnimation](./CameraFlightAnimation/README.md)
+
+## 运行示例
+
+```bash
+npm install
+npm run serve
+```

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>three.js webgl - cameraFlightAnimation</title>
+    <title>three.js webgl - CameraFlightAnimation</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link type="text/css" rel="stylesheet" href="main.css">
@@ -13,7 +13,7 @@
 			{
 				"imports": {
 					"three": "../node_modules/three/build/three.module.js",
-					"libs/": "./libs/"
+					"three/addons/": "../node_modules/three/examples/jsm/"
 				}
 			}
 		</script>
@@ -21,9 +21,9 @@
     <script type="module">
 
         import * as THREE from 'three';
-        import TWEEN from 'libs/tween.module.js';
-        import { GUI } from 'libs/lil-gui.module.min.js';
-        import { OrbitControls } from 'libs/OrbitControls.js';
+        import TWEEN from 'three/addons/libs/tween.module.js';
+        import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+        // import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
         import getCameraFlightAnimation from "../CameraFlightAnimation/dist/CameraFlightAnimation.esm.js";
 
         const CameraFlightAnimation = getCameraFlightAnimation(THREE, TWEEN);
